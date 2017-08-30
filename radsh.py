@@ -1,3 +1,9 @@
+# RaDSH is a Rapid Designer for Static HTML.
+# Visit the official repositiory at https://github.com/radialapps/radsh
+#
+# Copyright 2017 (C) RadialApps <radialapps@gmail.com>
+#
+
 import pandas as pd
 import re
 import sys
