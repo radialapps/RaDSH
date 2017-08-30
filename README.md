@@ -18,28 +18,36 @@ Note: there should always be a column named `filename` in the data file, which p
 RaDSH consists of a preprocessor and a compiler, each having only one command. The preprocessor is used to process boolean values, only deciding whether a certain section must be present in the output file. The compiler only substitutes the values from the data into the final output.
 ### Preprocessor
 The syntax for a preprocessor check is as follows:
-`[# ^^conditional^^ $$IfTrue$$ $!IfNotTrue!$]`
+```HTML
+[# ^^conditional^^ $$IfTrue$$ $!IfNotTrue!$]
+```
 The `conditional` is the name of a column in the input data. If the column has a value of boolean true (`1`), then the entire string above is replaced with `IfTrue`. If the column has the value false (`0`), then it is replaced by `IfNotTrue`. If no matches are found, or if the corresponding output string for the conditional is missing, the string will not be present in the output.
 ### Compiler
 The syntax for the compiler is as follows:
-`{{column_name}}`
+```HTML
+{{column_name}}
+```
 Just that! Here, `column_name` is the name of a column present in the input data. In the output, the above string will be replaced with the value of the column for that file (remember each file corresponds to a row).
 You can also substitute strings with contents of files, by specifying the specific cell for `column_name` as
 `file=somefile.txt`
 Note that the preprocessor and compiler are also run on each substituted file, so you can get values from the data into the included files if required. You may also further include files in included fies using the same syntax.
 # Example
 Consider your `data.csv` to have the following data:
+
 | filename | name      | price | description           | description_present |
 |----------|-----------|-------|-----------------------|---------------------|
 | one      | Product 1 | $10   | file=description1.txt | 1                   |
 | two      | Product 2 | $20   | Short Description     | 1                   |
 | three    | Product 3 | $5    | nothing               | 0                   |
+
 Let the template be a file named `template.html` containing:
 ```HTML
+<body>
     <!-- This is {{filename}}.html -->
     Product Name: {{name}} <br>
     Price: {{price}} <br>
     [# ^^description_present^^ $${{description}}$$ $! Empty! !$]
+</body>
 ```
 Let there also be a file named `description1.txt` containing
 ```
@@ -50,23 +58,29 @@ Then running RaDSH would produce three files, `one.html`, `two.html` and `three.
 Their content would be as follows:
 
 ```HTML
+<body>
     <!-- This is one.html -->
     Product Name: Product 1 <br>
     Price: $10  <br>
     This is a small description for Product 1 <br>
 It can contain multiple lines!
+</body>
 ```
 ```HTML
+<body>
     <!-- This is two.html -->
     Product Name: Product 2 <br>
     Price: $20  <br>
     Short Description
+</body>
 ```
 ```HTML
+<body>
     <!-- This is three.html -->
     Product Name: Product 3 <br>
     Price: $5  <br>
     Empty! 
+</body>
 ```
 Note: As can be seen, text drawn from external file includes is not indented in the final file.
 
