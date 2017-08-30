@@ -1,0 +1,2 @@
+This is a small description for Product 1 <br>
+It can contain multiple lines!
