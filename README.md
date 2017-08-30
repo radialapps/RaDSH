@@ -14,8 +14,8 @@ RaDSH uses Python 3, and needs the pandas library for reading CSV files.
 ```
 python radsh.py <data-csv> <template> <extension>
 ```
-First, you need to write down a <template> using the syntax as described in the next section. For substituting values, a CSV file <data-csv> must be created containing different fields. In this, each row corresponds to one file that RaDSH outputs, while each column is a unique value that is mapped to the column name. All boolean values must be encoded as 0 or 1.
-Note: there should always be a column named `filename` in the data file, which points to the path of the file to be generated. The extension of the files will be as set by <extension>. An example is provided.
+First, you need to write down a `<template>` using the syntax as described in the next section. For substituting values, a CSV file `<data-csv>` must be created containing different fields. In this, each row corresponds to one file that RaDSH outputs, while each column is a unique value that is mapped to the column name. All boolean values must be encoded as 0 or 1.
+Note: there should always be a column named `filename` in the data file, which points to the path of the file to be generated. The extension of the files will be as set by `<extension>`. An example is provided.
 
 # Syntax
 RaDSH consists of a preprocessor and a compiler, each having only one command. The preprocessor is used to process boolean values, only deciding whether a certain section must be present in the output file. The compiler only substitutes the values from the data into the final output.
