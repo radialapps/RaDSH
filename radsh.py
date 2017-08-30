@@ -1,13 +1,25 @@
 import pandas as pd
 import re
+import sys
+import os
+
+# Check arguments
+if len(sys.argv) != 4:
+    print("Wrong number of arguments!\nUsage: python radsh.py <data-csv> <template> <extension>")
+    quit()
+
+for i in range(1,3):
+    if not os.path.isfile(sys.argv[i]):
+        print("File not found --", sys.argv[i])
+        quit()
 
 # Read our data into a pandas dataframe
 print('Reading data')
-df = pd.read_csv('data.csv')
+df = pd.read_csv(sys.argv[1])
 
 # Read the template file
 print('Reading template')
-with open('template.html') as f:
+with open(sys.argv[2]) as f:
     template = f.read()
 
 # Just to be safe
@@ -97,7 +109,7 @@ for index,row in df.iterrows():
         continue;
         
     # Get the file to save to
-    filename = './' + row['filename'] + '.html'
+    filename = row['filename'] + '.' + sys.argv[3]
     print(' ------------ Now working on ', filename, '------------')
     
     # Start working
