@@ -8,7 +8,7 @@ RaDSH is a small python script designed to make life simpler for designing stati
 A sample site generated using RaDSH can be found at **http://radialapps.com**. Barring the index and other unique pages, the site was entirely generated using RaDSH from a single template for all product pages. This saves time on editing everything every time there needs to be some change, while not using any server side includes.
 
 # Setup
-RaDSH uses Python 3, and needs the pandas library for reading CSV files.
+RaDSH is tested and works on both Python 2 and Python 3.
 
 # Usage
 ```
