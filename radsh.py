@@ -62,18 +62,18 @@ def preprocess(match):
 
         if current_row[col] == "1":
             # Answer if true
-            if len(re.findall(regexdollar, com)) > 0:
-                print(col, ' == true -- ', re.findall(regexdollar, com)[0])
-                return re.findall(regexdollar, com)[0]
-
-        elif current_row[col] == "0":
+            return preprocess_answer(regexdollar, com, "true")
+        else:
             # Answer if false
-            if len(re.findall(regexnotdollar, com)) > 0:
-                print(col, ' == false -- ', re.findall(regexnotdollar, com)[0])
-                return re.findall(regexnotdollar, com)[0]
+            return preprocess_answer(regexnotdollar, com, "false")
 
     print(com, " -- no match")
     return ""
+
+def preprocess_answer(rx, com, message):
+    if len(re.findall(rx, com)) > 0:
+        print(col, ' == ' + message + '-- ', re.findall(rx, com)[0])
+        return re.findall(rx, com)[0]
 
 # Actual compilation
 def compile(match):
