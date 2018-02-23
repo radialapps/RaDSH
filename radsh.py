@@ -51,7 +51,7 @@ def preprocess(match):
 
     # Get the string to be processed
     com = match.strip("[]")
-    if com[:1]!="#":
+    if com[:1] != "#":
         return match
 
     # Look for conditions
@@ -60,16 +60,19 @@ def preprocess(match):
         if not col in data_columns:
             continue
 
-        if current_row[col] == "1":
-            # Answer if true
-            return preprocess_answer(regexdollar, com, "true")
-        else:
-            # Answer if false
-            return preprocess_answer(regexnotdollar, com, "false")
+        return preprocess_col(col, com)
 
-    print(com, " -- no match")
-    return ""
-
+    print(com, ' -- no match')
+    return ''
+    
+def preprocess_col(col, com):
+    if current_row[col] == '1':
+        # Answer if true
+        return preprocess_answer(regexdollar, com, "true")
+    else:
+        # Answer if false
+        return preprocess_answer(regexnotdollar, com, "false")
+            
 def preprocess_answer(rx, com, message):
     if len(re.findall(rx, com)) > 0:
         print(col, ' == ' + message + '-- ', re.findall(rx, com)[0])
