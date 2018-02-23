@@ -3,6 +3,7 @@
 RaDSH (pronounced *radish*) stands for **Ra**pid **D**esigner for **S**tatic **H**TML. 
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/fcbf0f07c740ec14e5e0/maintainability)](https://codeclimate.com/github/radialapps/RaDSH/maintainability)
+[![GitHub license](https://img.shields.io/github/license/radialapps/RaDSH.svg)](https://github.com/radialapps/RaDSH/blob/master/LICENSE)
 
 RaDSH is a small python script designed to make life simpler for designing static HTML websites from scratch. It has support for creating multiple pages from a single (or multiple with only slight changes) template by substituting code words with proper values, different for different pages. The possible use cases include making simple static websites with slightly varying content and (say) a consistent look and feel. It can also be used to design small static e-commerce websites with different pages being generate for different products.
 
