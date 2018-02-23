@@ -87,29 +87,40 @@ def compile(match):
 
     # Look for things to do
     if col in data_columns:
-        # If a file is to be substituted
-        # Throws an error if the file is not found
-        if 'file=' in current_row[col]:
-            print ('Inserting file', current_row[col][5:])
-            with open(current_row[col][5:]) as fl:
-                temp = fl.read()
-
-            # Recursively process the file
-            return re.sub(regexcurl,compile, re.sub(regexsquare, preprocess, temp))
-
-        # Return the value of the requested cell
-        print (col, ' -- ', current_row[col])
-
-        # Look for http links and replace special characters
-        # TODO: If necessary, replace special characters everywhere
-        if current_row[col][:4] == 'http':
-            print('Detected http link')
-            return replace_special(current_row[col])
-
-        return current_row[col]
+        # Returned compiled column
+        return compile_col(col)
     else:
         # No such column
         return match
+
+def compile_col(col):
+    # If a file is to be substituted
+    # Throws an error if the file is not found
+    if 'file=' in current_row[col]:
+        return get_file(col)
+
+    # Return the value of the requested cell
+    print (col, ' -- ', current_row[col])
+
+    return escape_http(col)
+
+def get_file(col):
+    print ('Inserting file', current_row[col][5:])
+    with open(current_row[col][5:]) as fl:
+        temp = fl.read()
+
+    # Recursively process the file
+    return re.sub(regexcurl,compile, re.sub(regexsquare, preprocess, temp))
+        
+def escape_http(col):
+    # Replace special characters if http link
+    # Look for http links and replace special characters
+    # TODO: If necessary, replace special characters everywhere
+    if current_row[col][:4] == 'http':
+        print('Detected http link')
+        return replace_special(current_row[col])
+    else:
+        return current_row[col]
 
 # Main loop
 for index, raw_row in enumerate(data_rows):
